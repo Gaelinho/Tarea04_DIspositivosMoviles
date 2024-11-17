@@ -79,10 +79,15 @@ class PendientesActivity : ComponentActivity() {
             parent: AdapterView<*>,
             view: View, position: Int, id: Long
         ) {
-            Log.d(
-                "PendientesActivity",
-                (parent.adapter.getItem(position) as String)
-            )
+            if (parent.adapter.getItem(position) == "Agregar Tarea"){
+                val intent = Intent(parent.context, AddTaskActivity::class.java)
+                parent.context.startActivity(intent)
+            } else {
+                Log.d(
+                    "PendientesActivity",
+                    (parent.adapter.getItem(position) as String)
+                )
+            }
         }
     }
 
@@ -150,12 +155,22 @@ class PendientesActivity : ComponentActivity() {
             )
         )
 
-        var position = -1
+        var action : String? = intent.getStringExtra("action")
 
-        position = intent.getIntExtra("position", -1)
-        Toast.makeText(this, position.toString(), Toast.LENGTH_SHORT).show()
-        if (position != -1) {
-            menuTask.removeAt(position)
+        if (action == "edit") {
+            var position = intent.getIntExtra("position", -1)
+            Toast.makeText(this, "Cambios guardados", Toast.LENGTH_SHORT).show()
+            if (position != -1) {
+                menuTask.removeAt(position)
+                var nuevo : Task = Task(intent.getStringExtra("taskName").toString(),
+                    intent.getStringExtra("taskSubject").toString(),
+                    intent.getStringExtra("taskDescription").toString(),
+                    intent.getStringExtra("taskDate").toString(),
+                    intent.getStringExtra("taskTime").toString(),
+                    intent.getBooleanExtra("taskPriority", false))
+                menuTask.add(nuevo)
+            }
+        } else if (action == "add") {
             var nuevo : Task = Task(intent.getStringExtra("taskName").toString(),
                 intent.getStringExtra("taskSubject").toString(),
                 intent.getStringExtra("taskDescription").toString(),
@@ -164,6 +179,7 @@ class PendientesActivity : ComponentActivity() {
                 intent.getBooleanExtra("taskPriority", false))
             menuTask.add(nuevo)
         }
+
 
         val adapter: TaskAdapter = TaskAdapter(this, R.layout.task_in_list, menuTask)
         val listView: ListView = findViewById(R.id.list)

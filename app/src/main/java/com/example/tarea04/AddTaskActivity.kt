@@ -12,19 +12,11 @@ import androidx.activity.ComponentActivity
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class EditTaskActivity : ComponentActivity() {
+class AddTaskActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.edit_task_layout)
-
-        val taskName = intent.getStringExtra("taskName")
-        val taskSubject = intent.getStringExtra("taskSubject")
-        val taskDate = intent.getStringExtra("taskDate")
-        val taskTime = intent.getStringExtra("taskTime")
-        val taskDescription = intent.getStringExtra("taskDescription")
-        val taskPriority = intent.getBooleanExtra("taskPriority", false)
-        val position = intent.getIntExtra("position", -1)
+        setContentView(R.layout.add_task_layout)
 
         val name = findViewById<EditText>(R.id.task_name)
         val subject = findViewById<Spinner>(R.id.spinner_task_subject)
@@ -38,16 +30,8 @@ class EditTaskActivity : ComponentActivity() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         subject.adapter = adapter
 
-        name.setText(taskName)
-        date.setText(taskDate)
-        time.setText(taskTime)
-        description.setText(taskDescription)
-        priority.isChecked = taskPriority
-
-        subject.setSelection(subjects.indexOf(taskSubject))
-
-        val buttonConfirm = findViewById<Button>(R.id.buttonConfirm)
-        buttonConfirm.setOnClickListener {
+        val buttonAdd = findViewById<Button>(R.id.buttonAdd)
+        buttonAdd.setOnClickListener {
             val dateString = date.text.toString()
             val timeString = time.text.toString()
 
@@ -69,8 +53,7 @@ class EditTaskActivity : ComponentActivity() {
                 data.putExtra("taskTime", timeString)
                 data.putExtra("taskDescription", description.text.toString())
                 data.putExtra("taskPriority", priority.isChecked)
-                data.putExtra("position", position)
-                data.putExtra("action", "edit")
+                data.putExtra("action", "add")
 
                 startActivity(data)
             }

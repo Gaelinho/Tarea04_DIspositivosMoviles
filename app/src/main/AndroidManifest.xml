@@ -23,6 +23,7 @@
 
         <activity android:name=".TaskDetailsActivity" />
         <activity android:name=".EditTaskActivity" />
+        <activity android:name=".AddTaskActivity" />
     </application>
 
 </manifest>

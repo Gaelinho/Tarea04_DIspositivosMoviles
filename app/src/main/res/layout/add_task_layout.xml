@@ -86,7 +86,6 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="2"
-                android:focusable="false"
                 android:hint="@string/date_format"
                 android:inputType="date" />
 
@@ -98,7 +97,6 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="2"
-                android:focusable="false"
                 android:hint="@string/time_format"
                 android:inputType="time" />
         </LinearLayout>
@@ -119,7 +117,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/buttonAdd"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"

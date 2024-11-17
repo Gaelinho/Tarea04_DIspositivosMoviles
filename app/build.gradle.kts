@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.tarea03"
+    namespace = "com.example.tarea04"
     compileSdk = 34
 
     defaultConfig {

@@ -74,18 +74,6 @@
                 android:text="Hora Entrega" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="25dp"
-            android:layout_marginEnd="50dp"
-            android:gravity="center"
-            android:text="Descripción"
-            android:textColor="#000000"
-            android:textSize="18sp" />
-
         <CheckBox
             android:id="@+id/checkBox"
             android:layout_width="wrap_content"
@@ -95,15 +83,52 @@
             android:text="@string/high_priority"
             android:clickable="false" />
 
-        <Button
-            android:id="@+id/buttonBack"
+        <LinearLayout
+            android:id="@+id/buttons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="25dp"
-            android:backgroundTint="#FB54BA"
-            android:text="@string/get_back"
-            android:textStyle="bold" />
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonSeeDetails"
+                android:textSize="12sp"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25dp"
+                android:backgroundTint="#FB54BA"
+                android:text="@string/see_details"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/buttonEdit"
+                android:textSize="12sp"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25dp"
+                android:backgroundTint="#FB54BA"
+                android:text="@string/edit"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/buttonComplete"
+                android:textSize="12sp"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25dp"
+                android:backgroundTint="#FB54BA"
+                android:text="@string/completed"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Tarea03" parent="android:Theme.Material.Light.DarkActionBar" />
-    <style name="Theme.Tarea03.NoActionBar">
+    <style name="Theme.Tarea04" parent="android:Theme.Material.Light.DarkActionBar" />
+    <style name="Theme.Tarea04.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-    <style name="Theme.Tarea03.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="Theme.Tarea03.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.Tarea04.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.Tarea04.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

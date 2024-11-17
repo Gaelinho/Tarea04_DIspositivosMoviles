@@ -1,4 +1,4 @@
-package com.example.tarea03
+package com.example.tarea04
 
 import android.os.Bundle
 import android.util.Log
@@ -10,10 +10,13 @@ import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.activity.ComponentActivity
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 
 class PendientesActivity : ComponentActivity() {
+
+    private val menuTask : ArrayList<Task> = ArrayList<Task>();
 
     private lateinit var mMenuSections: Array<String>
     private lateinit var mDrawerLayout: DrawerLayout
@@ -23,6 +26,8 @@ class PendientesActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.task_list_layout)
+
+        crearMenu()
 
         mMenuSections = resources.getStringArray(R.array.menu_items)
         mDrawerLayout = (findViewById(R.id.drawer_layout) as DrawerLayout)
@@ -99,5 +104,14 @@ class PendientesActivity : ComponentActivity() {
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         mDrawerToggle.syncState()
+    }
+
+    fun crearMenu(){
+        menuTask.add(Task("Tarea 04", "Dispositivos Moviles", "Intents", "19/11/2024", "23:59", false))
+        menuTask.add(Task("Examen 03", "Dispositivos Moviles", "Bases de Datos", "22/11/2024", "07:00", true))
+
+        val adapter : TaskAdapter = TaskAdapter(this, R.layout.task_in_list, menuTask)
+        val listView : ListView = findViewById(R.id.list)
+        listView.adapter = adapter
     }
 }

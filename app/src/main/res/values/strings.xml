@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Tarea03</string>
+    <string name="app_name">Tarea04</string>
 
     <!--Cadenas para layout add_task-->
     <string name="add_task_title">Nueva Tarea</string>
@@ -13,6 +13,9 @@
     <!--Cadenas para layout add_task-->
     <string name="edit">Editar</string>
     <string name="completed">Completado</string>
+    <string name="confirm">Confirmar cambios</string>
+    <string name="see_details">Ver Detalles</string>
+    <string name="get_back">Regresar</string>
 
     <string name="ord_fecha">Ordenar por Fecha</string>
     <string name="ord_materia">Ordenar por Materia</string>
@@ -20,7 +23,8 @@
 
     <string name="DrawerOpened">NavigationDrawerOpened</string>
     <string name="DrawerClosed">NavigationDrawerClosed</string>
-
+    <string name="edit_task">Editar</string>
+    v
     <string-array name="menu_items">
         <item>Agregar Tarea</item>
         <item>Eliminar Tarea</item>

@@ -7,7 +7,10 @@ import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.activity.ComponentActivity
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class EditTaskActivity : ComponentActivity() {
 
@@ -45,7 +48,31 @@ class EditTaskActivity : ComponentActivity() {
 
         val buttonConfirm = findViewById<Button>(R.id.buttonConfirm)
         buttonConfirm.setOnClickListener {
-            finish()
+            val dateString = date.text.toString()
+            val timeString = time.text.toString()
+
+            // Regular expressions for strict format validation
+            val dateRegex = """^\d{2}/\d{2}/\d{4}$""".toRegex()
+            val timeRegex = """^\d{2}:\d{2}$""".toRegex()
+
+            if (!dateRegex.matches(dateString)) {
+                Toast.makeText(this, "Invalid date format. Please use dd/MM/yyyy.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            } else if (!timeRegex.matches(timeString)) {
+                Toast.makeText(this, "Invalid time format. Please use HH:mm.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            } else {
+                val data = Intent(this, PendientesActivity::class.java)
+                data.putExtra("taskName", name.text.toString())
+                data.putExtra("taskSubject", subject.selectedItem.toString())
+                data.putExtra("taskDate", dateString)
+                data.putExtra("taskTime", timeString)
+                data.putExtra("taskDescription", description.text.toString())
+                data.putExtra("taskPriority", priority.isChecked)
+                data.putExtra("position", position)
+
+                startActivity(data)
+            }
         }
     }
 }

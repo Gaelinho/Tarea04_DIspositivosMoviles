@@ -1,5 +1,6 @@
 package com.example.tarea04
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -9,6 +10,7 @@ import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -22,6 +24,18 @@ class PendientesActivity : ComponentActivity() {
     private lateinit var mDrawerLayout: DrawerLayout
     private lateinit var mDrawerList: ListView
     private lateinit var mDrawerToggle: ActionBarDrawerToggle
+
+    private val editTaskLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val editedTask: Task = result.data?.getSerializableExtra("editedTask") as Task
+            val position = result.data?.getIntExtra("position", -1) ?: -1
+
+            if (position != -1) {
+                menuTask[position] = editedTask  // Update the task at the specified position
+                (findViewById<ListView>(R.id.list).adapter as TaskAdapter).notifyDataSetChanged()  // Notify the adapter
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,8 +68,6 @@ class PendientesActivity : ComponentActivity() {
         }
 
         mDrawerList.onItemClickListener = DrawerItemClickListener()
-
-
         mDrawerLayout.addDrawerListener(mDrawerToggle)
 
         actionBar!!.setDisplayHomeAsUpEnabled(true)
@@ -106,12 +118,55 @@ class PendientesActivity : ComponentActivity() {
         mDrawerToggle.syncState()
     }
 
-    fun crearMenu(){
-        menuTask.add(Task("Tarea 04", "Dispositivos Moviles", "Intents", "19/11/2024", "23:59", false))
-        menuTask.add(Task("Examen 03", "Dispositivos Moviles", "Bases de Datos", "22/11/2024", "07:00", true))
+    fun crearMenu() {
+        menuTask.add(
+            Task(
+                "Tarea 04",
+                "Dispositivos Moviles",
+                "Intents",
+                "19/11/2024",
+                "23:59",
+                false
+            )
+        )
+        menuTask.add(
+            Task(
+                "Examen 03",
+                "Dispositivos Moviles",
+                "Bases de Datos",
+                "22/11/2024",
+                "07:00",
+                true
+            )
+        )
+        menuTask.add(
+            Task(
+                "Practica 07",
+                "Compiladores",
+                "Verificacion de tipos",
+                "22/11/2024",
+                "23:59",
+                false
+            )
+        )
 
-        val adapter : TaskAdapter = TaskAdapter(this, R.layout.task_in_list, menuTask)
-        val listView : ListView = findViewById(R.id.list)
+        var position = -1
+
+        position = intent.getIntExtra("position", -1)
+        Toast.makeText(this, position.toString(), Toast.LENGTH_SHORT).show()
+        if (position != -1) {
+            menuTask.removeAt(position)
+            var nuevo : Task = Task(intent.getStringExtra("taskName").toString(),
+                intent.getStringExtra("taskSubject").toString(),
+                intent.getStringExtra("taskDescription").toString(),
+                intent.getStringExtra("taskDate").toString(),
+                intent.getStringExtra("taskTime").toString(),
+                intent.getBooleanExtra("taskPriority", false))
+            menuTask.add(nuevo)
+        }
+
+        val adapter: TaskAdapter = TaskAdapter(this, R.layout.task_in_list, menuTask)
+        val listView: ListView = findViewById(R.id.list)
         listView.adapter = adapter
     }
 }

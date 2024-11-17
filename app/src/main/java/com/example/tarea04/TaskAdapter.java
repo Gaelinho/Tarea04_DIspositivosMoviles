@@ -74,6 +74,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
             intent.putExtra("taskTime", task.getHora());
             intent.putExtra("taskDescription", task.getDescripcion());
             intent.putExtra("taskPriority", task.isPrioridad());
+            intent.putExtra("position", position);
             context.startActivity(intent);
         });
 
